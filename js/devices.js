@@ -76,6 +76,7 @@ document
   });
 
 const Element = (id, status = STATUS.INACTIVE, data) => {
+  console.log(data);
   const Device = document.createElement("div");
   Device.className = "item-device " + status;
   Device.id = id;
