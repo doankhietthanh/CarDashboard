@@ -1,0 +1,273 @@
+.material-symbols-rounded {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+    color: #adadad;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.material-symbols-rounded:hover {
+    color: #fff;
+    transition: color 0.4s;
+}
+
+.material-symbols-rounded.active {
+    color: #297aff;
+    transition: all 0.3s;
+}
+
+.header .material-symbols-rounded {
+    font-size: 28px;
+}
+
+.device-icon .material-symbols-rounded {
+    font-size: 28px;
+    color: #fff;
+}
+
+/* Circle range */
+.speed .box {
+    position: relative;
+    /* margin: 50px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.speed .box .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+.speed .box .text h2 {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.speed .box .text small {
+    font-size: 18px;
+    display: block;
+}
+
+.speed .circle {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: rotate(-120deg);
+}
+
+.speed .circle .points {
+    width: 3px;
+    height: 20px;
+    background: #0007;
+    position: absolute;
+    border-radius: 3px;
+    transform: rotate(calc(var(--i) * var(--rot))) translateY(-100px);
+}
+
+.speed .points.marked {
+    animation: glow 0.04s linear forwards;
+    animation-delay: calc(var(--i) * 0.05s);
+}
+
+/*  */
+
+.gas {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+}
+.gas .box {
+    position: relative;
+}
+.gas .box .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+.gas .box .text h2 {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.gas .box .text small {
+    font-size: 18px;
+    display: block;
+}
+
+.gas .circle {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gas .circle .points {
+    width: 3px;
+    height: 10px;
+    background: #0007;
+    position: absolute;
+    border-radius: 3px;
+
+    position: absolute;
+    top: 15px;
+    left: calc(var(--i) * var(--rot) / 1.2);
+}
+
+.gas .points.marked {
+    animation: glow 0.04s linear forwards;
+    animation-delay: calc(var(--i) * 0.05s);
+}
+
+/*  */
+
+.circle-control .box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-control .box .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+
+.circle-control .box .text h2 {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.circle-control .box .text small {
+    font-size: 18px;
+    display: block;
+}
+
+.circle-control .circle {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: rotate(-90deg);
+}
+
+.circle-control .circle .points {
+    width: 3px;
+    height: 20px;
+    background: #0007;
+    position: absolute;
+    border-radius: 3px;
+    transform: rotate(calc(var(--i) * var(--rot))) translateY(-100px);
+}
+
+.circle-control .points.marked {
+    animation: glow 0.04s linear forwards;
+    animation-delay: calc(var(--i) * 0.05s);
+}
+
+@keyframes glow {
+    0% {
+        background: #0007;
+        box-shadow: none;
+    }
+    100% {
+        background: var(--bgColor);
+        box-shadow: 0 0 10px var(--bgColor);
+    }
+}
+
+#appearance7 .rs-range-color {
+    background-color: #297aff;
+}
+#appearance7 .rs-path-color {
+    background-color: #1c1c1c;
+}
+#appearance7 .rs-handle {
+    background-color: #5592ff;
+    padding: 7px;
+    border: 2px solid #5592ff;
+}
+#appearance7 .rs-handle.rs-focus {
+    border-color: #297aff;
+}
+#appearance7 .rs-handle:after {
+    border-color: #297aff;
+    background-color: #297aff;
+}
+#appearance7 .rs-border {
+    border: none;
+}
+#appearance7 .rs-bg-color {
+    background-color: #21242e;
+}
+
+/*  */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+
+.slider-toggle {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1c1c1c;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider-toggle:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider-toggle {
+    background-color: #2196f3;
+}
+
+input:focus + .slider-toggle {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider-toggle:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/icons.css">
+    <link rel="stylesheet" href="./css/music.css">
+    <title>Car Dashboard</title>
+</head>
+
+<body>
+    <div class="layout">
+        <div class="slider">
+            <div>
+                <span class="material-symbols-rounded active">
+                    near_me
+                </span>
+            </div>
+
+            <div>
+                <span class="material-symbols-rounded">
+                    grid_view
+                </span>
+            </div>
+
+            <div>
+                <span class="material-symbols-rounded">
+                    music_note
+                </span>
+            </div>
+
+            <div>
+                <span class="material-symbols-rounded">
+                    call
+                </span>
+            </div>
+
+            <div>
+                <span class="material-symbols-rounded ">
+                    directions_car
+                </span>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="header">
+                <div class="left-header">
+                    <div class="more-icon">
+                        <span class="material-symbols-rounded">
+                            more_horiz
+                        </span>
+                    </div>
+                    <div class="lte-icon">
+                        <span class="material-symbols-rounded">
+                            lte_mobiledata
+                        </span>
+                    </div>
+                    <div class="bluetooth-icon">
+                        <span class="material-symbols-rounded">
+                            bluetooth
+                        </span>
+                    </div>
+                </div>
+
+                <div class="right-header">
+                    <div class="temperature">
+                        17°C
+                    </div>
+                    <div class="clock">
+                        12:04 AM
+                    </div>
+                </div>
+
+            </div>
+            <div class="container">
+                <div class="container-cover">
+                    <div class="content-cover">
+                        <div class="near-me-tab">
+                            <div class="car-info">
+                                <div class="car-image">
+                                    <img src="./images/car-top-view-2.png" alt="car-dark-mode">
+                                </div>
+
+                                <div class="car-properties">
+                                    <div class="speed">
+                                        <div class="box">
+                                            <div class="circle" data-dots="24" data-percent="70" name="speed"
+                                                style="--bgColor: #297aff">
+                                            </div>
+                                            <div class="text">
+                                                <h2>90</h2>
+                                                <small>km/h</small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="gas">
+                                        <span class="material-symbols-rounded">
+                                            local_gas_station
+                                        </span>
+
+                                        <div class="box">
+                                            <div class="circle" data-dots="15" data-percent="60" name="gas"
+                                                style="--bgColor: #297aff">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="drive-info">
+                                <div class="map" id="map"></div>
+                                <div class="weather"></div>
+                                <div class="music">
+                                    <div class="music-header">
+                                        <div class="music-image">
+                                            <img class="cd-thumb-2" src="./images/car-dark-mode.jpg" alt="music-image">
+                                        </div>
+                                        <div class="music-info">
+                                            <div class="music-name">We don't talk anymore</div>
+                                            <div class="music-auth">AAA</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="music-control">
+                                        <span class="material-symbols-rounded btn-prev-2">
+                                            skip_previous
+                                        </span>
+                                        <span class="material-symbols-rounded btn-toggle-play-2">
+                                            play_arrow
+                                        </span>
+                                        <span class="material-symbols-rounded btn-next-2">
+                                            skip_next
+                                        </span>
+                                    </div>
+                                    <div class="music-timer">
+                                        <input id="music-progress" class="music-progress" type="range" value="0"
+                                            step="1" min="0" max="100">
+
+                                        <audio id="music-audio" src=""></audio>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-cover">
+                        <div class="grid-view-tab">
+                            <div class="box-choose">
+                                <div class="box-choose-title">Devices</div>
+                                <div class="box-choose-items">
+                                    <div class="list-items">
+                                        <div class="item-device active">
+                                            <span class="material-symbols-rounded">
+                                                tv_gen
+                                            </span>
+                                            <div class="item-status"></div>
+                                        </div>
+
+                                        <div class="item-device busy">
+                                            <span class="material-symbols-rounded">
+                                                tv_gen
+                                            </span>
+                                            <div class="item-status"></div>
+                                        </div>
+
+                                        <div class="item-device">
+                                            <span class="material-symbols-rounded">
+                                                tv_gen
+                                            </span>
+                                            <div class="item-status"></div>
+                                        </div>
+
+
+                                        <div class="item-add" id="btn-add-item">
+                                            <span class="material-symbols-rounded">
+                                                add
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="modal-add-items">
+                                        <div class="modal-header">Add device</div>
+                                        <div class="modal-body">
+                                            <div class="modal-choose-name">
+                                                <label>Name</label>
+                                                <input type="text" class="modal-device-name"
+                                                    placeholder="Enter device name">
+                                            </div>
+                                            <legend>Icon</legend>
+                                            <div class="modal-choose-device">
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        tv_gen
+                                                    </span>
+                                                </div>
+
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        light
+                                                    </span>
+                                                </div>
+
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        air_purifier_gen
+                                                    </span>
+                                                </div>
+
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        <span class="material-symbols-outlined">
+                                                            camera_indoor
+                                                        </span>
+                                                    </span>
+                                                </div>
+
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        mode_fan
+                                                    </span>
+                                                </div>
+
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        notifications
+                                                    </span>
+                                                </div>
+
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        delete
+                                                    </span>
+                                                </div>
+
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        cleaning_services
+                                                    </span>
+                                                </div>
+
+                                                <div class="modal-device-icon">
+                                                    <span class="material-symbols-rounded">
+                                                        lock
+                                                    </span>
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div class="modal-choose-status">
+                                                <label>Status</label>
+                                                <label class="switch">
+                                                    <input type="checkbox">
+                                                    <span class="slider-toggle"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="modal-btn-add">
+                                                <span class="material-symbols-rounded">
+                                                    add_circle
+                                                </span>
+                                            </div>
+                                            <div class="modal-btn-remove">
+                                                <span class="material-symbols-rounded">
+                                                    cancel
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-device-controller">
+                                <div class="device-header">
+                                    <div class="device-title">Light</div>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider-toggle"></span>
+                                    </label>
+                                </div>
+
+                                <div class="device-image">
+                                    <span class="material-symbols-rounded">
+                                        light
+                                    </span>
+                                </div>
+                                <div class="device-timer">
+                                    <div class="timer-start">
+                                        <span class="material-symbols-rounded">
+                                            schedule
+                                        </span>
+                                        <div class="time">
+                                            9:30 AM
+                                        </div>
+                                    </div>
+                                    <div class="timer-to">To</div>
+                                    <div class="timer-end">
+                                        <span class="material-symbols-rounded">
+                                            schedule
+                                        </span>
+                                        <div class="time">
+                                            9:30 AM
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="device-control">
+                                    <div id="appearance7"></div>
+                                    <div class="circle-control">
+                                        <div class="box">
+                                            <div id="control-value" class="circle" data-dots="20" data-percent="0"
+                                                name="control" style="--bgColor: #297aff">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-cover">
+                        <div class="player">
+                            <!-- Dashboard -->
+                            <div class="dashboard">
+                                <!-- Header -->
+                                <header>
+                                    <h4>Now playing:</h4>
+                                    <h2>String 57th & 9th</h2>
+                                </header>
+
+                                <!-- CD -->
+                                <div class="cd">
+                                    <div class="cd-thumb">
+                                    </div>
+                                </div>
+
+                                <!-- Control -->
+                                <div class="control">
+                                    <span class="material-symbols-rounded btn btn-repeat">
+                                        replay
+                                    </span>
+                                    <span class="material-symbols-rounded btn btn-prev">
+                                        skip_previous
+                                    </span>
+                                    <span class="material-symbols-rounded btn btn-toggle-play">
+                                        play_arrow
+                                    </span>
+
+                                    <span class="material-symbols-rounded btn btn-next">
+                                        skip_next
+                                    </span>
+                                    <span class="material-symbols-rounded btn btn-random">
+                                        shuffle
+                                    </span>
+                                </div>
+
+                                <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+
+                                <audio id="audio" src=""></audio>
+                            </div>
+
+                            <!-- Playlist -->
+                            <div class="playlist" id="playlist">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-cover">
+                        <div class="phone-tab">
+                            <div class="keypad">
+                                <div class="keypad-result">
+                                    <input type="text" id="keypad-result" value="0">
+                                </div>
+                                <div class="keypad-numbers">
+                                    <div class="keypad-line">
+                                        <div class="keypad-number" value="1">1</div>
+                                        <div class="keypad-number" value="2">2</div>
+                                        <div class="keypad-number" value="3">3</div>
+                                    </div>
+
+                                    <div class="keypad-line">
+                                        <div class="keypad-number" value="4">4</div>
+                                        <div class="keypad-number" value="5">5</div>
+                                        <div class="keypad-number" value="6">6</div>
+                                    </div>
+
+                                    <div class="keypad-line">
+                                        <div class="keypad-number" value="7">7</div>
+                                        <div class="keypad-number" value="8">8</div>
+                                        <div class="keypad-number" value="9">9</div>
+                                    </div>
+
+                                    <div class="keypad-line">
+                                        <div class="keypad-number" value="*">*</div>
+                                        <div class="keypad-number" value="0">0</div>
+                                        <div class="keypad-number" value="#">#</div>
+                                    </div>
+
+                                    <div class="keypad-line">
+                                        <div class="keypad-call">
+                                            <span class="material-symbols-rounded">
+                                                call
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="phonebook">
+                                <div class="phonebook-header">
+                                    <div class="phonebook-title">Phonebook</div>
+
+                                </div>
+                                <div class="phonebook-person">
+                                    <div class="phonebook-person-left">
+                                        <div class="phonebook-person-avatar">
+                                            <img src="./images/car-dark-mode.jpg">
+                                        </div>
+                                    </div>
+                                    <div class="phonebook-person-center">
+                                        <div class="phonebook-person-name">
+                                            <span>John Doe</span>
+                                        </div>
+                                        <div class="phonebook-person-timer">
+                                            <span>10:30 AM</span>
+                                        </div>
+                                    </div>
+                                    <div class="phonebook-person-right">
+                                        <div class="phonebook-person-call">
+                                            <span class="material-symbols-rounded">
+                                                call
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" content-cover">yqeryhr
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+<script type="module" src="./js/main.js"></script>
+<script type="module" src="./js/slider.js"></script>
+<script type="module" src="./js/map.js"></script>
+<script type="module" src="./js/music.js"></script>
+<script type="module" src="./js/phone.js"></script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACuTNMTxxb4vzHNobOimpVFXpuVHiWZV4&callback=initMap&v=weekly"
+    defer></script>
+
+
+</html>
