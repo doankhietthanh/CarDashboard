@@ -9,6 +9,6 @@ sliders.forEach((slider, index) => {
 
     slider.querySelector("span").classList.add("active");
     console.log(`transform: translateY(${-100 * index}%)`);
-    containerCover.style = `transform: translateY(${(-100 / 5) * index}%)`;
+    containerCover.style = `transform: translateY(${(-100 / 4) * index}%)`;
   });
 });
