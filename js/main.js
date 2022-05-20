@@ -1,5 +1,11 @@
-const circles = document.querySelectorAll(".circle");
+import {
+  getDatabase,
+  ref,
+  set,
+  onValue,
+} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
 
+const circles = document.querySelectorAll(".circle");
 const renderCircleUI = () => {
   circles.forEach((elem) => {
     const name = elem.getAttribute("name");
@@ -8,7 +14,7 @@ const renderCircleUI = () => {
     const percent = Math.floor((dots * marked) / 100);
     const rotate = 360 / dots;
     const speed = document.querySelector(".text h2");
-    speed.textContent = marked * 2.4;
+
     let points = "";
     for (let i = 0; i < dots; i++) {
       if (name === "speed") {
@@ -30,6 +36,8 @@ const renderCircleUI = () => {
     for (let i = 0; i < percent; i++) {
       pointsMarked[i].classList.add("marked");
     }
+
+    speed.textContent = marked * 2.4;
   });
 };
 
@@ -52,10 +60,47 @@ const renderControlUI = (value) => {
   console.log(value);
   const controlValue = document.getElementById("control-value");
   controlValue.setAttribute("data-percent", value);
-
   renderCircleUI();
 };
 
+// Speed
+const db = getDatabase();
+const getSpeed = ref(db, "speed/");
+onValue(getSpeed, (snapshot) => {
+  const value = snapshot.val();
+  const data = (100 * value) / 240;
+  document.getElementById("speed-value").setAttribute("data-percent", data);
+  renderCircleUI();
+  setTimeout(() => {
+    document.querySelector(".speed h2").textContent = value;
+  }, 1000);
+});
+
+// Gas
+const getGas = ref(db, "gas/");
+onValue(getGas, (snapshot) => {
+  const data = snapshot.val();
+  document.getElementById("gas-value").setAttribute("data-percent", data);
+  renderCircleUI();
+});
+
+// Temperature
+const getTemperature = ref(db, "Temperature/");
+onValue(getTemperature, (snapshot) => {
+  const data = snapshot.val();
+  document.getElementById("temperature-value").textContent = data + "°C";
+});
+
+// Time
+const pad = (val) => {
+  return val < 10 ? "0" + val : val;
+};
+const h = new Date().getHours();
+const m = new Date().getMinutes();
+const output = pad(h) + ":" + pad(m);
+document.getElementById("time-value").textContent = output;
+
+// Modal
 const btnAddItem = document.getElementById("btn-add-item");
 let isModalAddIem = false;
 btnAddItem.addEventListener("click", () => {
