@@ -30,7 +30,6 @@ const status = document.querySelector(".modal-choose-status input");
 
 const STATUS = {
   ACTIVE: "active",
-  BUSY: "busy",
   INACTIVE: "inactive",
 };
 
@@ -66,19 +65,51 @@ function convertToSlug(text) {
     .replace(/[^\w-]+/g, "");
 }
 
+const slider = $("#appearance7").data("roundSlider");
+
+let activeId = "";
+
+$("#appearance7").on("change", function (e) {
+  if (activeId != "") {
+    const db = getDatabase();
+    set(ref(db, "devices/" + activeId + "/value"), e.value);
+  }
+});
+
+document
+  .querySelector(".box-device-controller input")
+  .addEventListener("click", (e) => {
+    if (activeId != "") {
+      const db = getDatabase();
+      set(
+        ref(db, "devices/" + activeId + "/status"),
+        e.target.checked ? STATUS.ACTIVE : STATUS.INACTIVE
+      );
+    }
+  });
+
 const Element = (id, status = STATUS.INACTIVE, data) => {
+  console.log(data);
   const Device = document.createElement("div");
   Device.className = "item-device " + status;
   Device.id = id;
+  const deviceData = data.find((item) => item[0] === id)[1];
   Device.addEventListener("click", () => {
-    const deviceData = data.find((item) => item[0] === id)[1];
-    console.log(deviceData);
+    activeId = id;
+    document.querySelector(".box-device-controller input").checked =
+      deviceData.status === STATUS.ACTIVE;
+    document.querySelector(".box-device-controller .device-title").textContent =
+      deviceData.name;
+    document.querySelector(
+      ".box-device-controller .material-symbols-rounded"
+    ).textContent = deviceData.icon;
+    slider.setValue(deviceData.value ? deviceData.value : 0);
   });
 
   const Icon = document.createElement("span");
   Icon.className = "material-symbols-rounded";
 
-  Icon.textContent = "tv_gen";
+  Icon.textContent = deviceData.icon;
 
   const Status = document.createElement("div");
   Status.className = "item-status";
@@ -123,15 +154,6 @@ addBtn.addEventListener("click", () => {
     }
   }
 
-  const device = Element(deviceID, status);
-
-  console.log({
-    deviceID,
-    statusDevice,
-    name,
-    icon,
-  });
-
   writeDevice(deviceID, statusDevice, name, icon);
 });
 
@@ -139,11 +161,22 @@ const db = getDatabase();
 const devicesRef = ref(db, "devices");
 onValue(devicesRef, (snapshot) => {
   const data = snapshot.val();
+
+  if (!data) {
+    document.querySelector(".box-device-controller").style.display = "none";
+  } else {
+    document.querySelector(".box-device-controller").style.display = "flex";
+  }
+
   document.querySelectorAll(".item-device").forEach((device) => {
     device.remove();
   });
+
   Object.entries(data).forEach(([key, value]) => {
     const device = Element(key, value.status, Object.entries(data));
     addDevice(device);
+    if (activeId === "") {
+      $(device).click();
+    }
   });
 });
